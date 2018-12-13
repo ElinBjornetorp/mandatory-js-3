@@ -2,43 +2,12 @@
 //Letar upp element
 let header = document.querySelector('h2');
 let subheader = document.querySelector('h3');
-let image = document.querySelector('img');
-let list = document.querySelector('ul');
+let imageContainer = document.querySelector('#imagecontainer');
+let image = document.querySelector('#imagecontainer img');
+let selectionDiv = document.querySelector('#selection');
 let galleryDiv = document.querySelector('#allpictures');
 
-//EXEMPELKOD, IF-SATS SOM KOLLAR VILKEN SIDA MAN ÄR PÅ
-
-//   //Letar upp hashtag
-//   let hash = window.location.hash;
-
-//  //Skapar variabler
-//   let hashArray;
-//   let breed;
-//   let subbreed;
-//
-//   //Index-sidan
-//   if(hash === ''){
-//
-//   }
-//   //Subbreed-sidan
-//   else if(hash.includes('_')){
-//       hashArray = hash.split('_'); //Splittar strängen
-//       breed = hashArray[0].substring(1); //Breed är första delen av strängen, utan hashtag
-//       subbreed = hashArray[1]; //Subbreed är andra delen av strängen
-//   }
-//   //Breed-sidan
-//   else {
-//       breed = hash.substring(1); //Tar bort hashtag
-//   }
-
-// EXEMPELKOD, PROMISE
-// return new Promise((resolve, reject) => {
-//   //First function in promise
-// })
-// .then(parseJSON) //second function in promise
-// //promise chain
-
-// --------------------------------------------------------------------------
+// --------------Funktion som hanterar rubrikerna ------------------------------
 function setHeaderAndSubHeader() {
   let hash = window.location.hash;
 
@@ -72,8 +41,7 @@ function setHeaderAndSubHeader() {
 
 // ------------- Funktion som kallar på showRandomImage, showRandomImageByBreed eller showRandomImageBySubBreed ------------------
 function setRandomImage(){
-  // debugger;
-
+  //Skapar variabler
   let hash = window.location.hash;
   let hashArray;
   let breed;
@@ -99,19 +67,19 @@ function setRandomImage(){
 
 // ------------- Funktion som visar en slumpad bild (alla raser) ------------------
 function showRandomImage() {
+  //GET request
   let request = new XMLHttpRequest();
   request.addEventListener('load', function() {
     return new Promise((resolve, reject) => {
       if(this.status >= 200 && this.status < 300) {
         resolve(this.responseText);
-      } //if
-    }) //End of first function in promise
+      }
+    })
     .then(parseJSON)
     .then(function(object){
       image.setAttribute('src', object.message);
-    }) //Funktion som uppdaterar bildens url
-  //promise chain
-  }); //End of event listener
+    })
+  });
   request.open('GET', 'https://dog.ceo/api/breeds/image/random');
   request.send();
 }
@@ -120,19 +88,19 @@ function showRandomImage() {
 function showRandomImageByBreed(breed) {
   let urlString;
 
+  //GET request
   let request = new XMLHttpRequest();
   request.addEventListener('load', function() {
     return new Promise((resolve, reject) => {
       if(this.status >= 200 && this.status < 300) {
         resolve(this.responseText);
-      } //if
-    }) //End of first function in promise
+      }
+    })
     .then(parseJSON)
     .then(function(object){
       image.setAttribute('src', object.message);
-    }) //Funktion som uppdaterar bildens url
-  //promise chain
-  }); //End of event listener
+    })
+  });
   request.open('GET', 'https://dog.ceo/api/breed/' + breed + '/images/random');
   request.send();
 }
@@ -141,19 +109,19 @@ function showRandomImageByBreed(breed) {
 function showRandomImageBySubBreed(breed, subbreed) {
   let urlString;
 
+  //GET request
   let request = new XMLHttpRequest();
   request.addEventListener('load', function() {
     new Promise((resolve, reject) => {
       if(this.status >= 200 && this.status < 300) {
         resolve(this.responseText);
-      } //if
-    }) //End of first function in promise
+      }
+    })
     .then(parseJSON)
     .then(function(object){
       image.setAttribute('src', object.message);
-    }) //Funktion som uppdaterar bildens url
-  //promise chain
-  }); //End of event listener
+    })
+  });
   urlString = 'https://dog.ceo/api/breed/' + breed + '/' + subbreed + '/images/random';
   request.open('GET', urlString);
   request.send();
@@ -185,7 +153,7 @@ function setRefreshButton() {
   let subbreed;
   let newRefreshButton;
 
-  //Index-sidan
+  // -- << Kod för index-sidan >> --
   if(hash === ''){
     //Om det inte finns någon refresh-knapp, så skapa en och lägg till eventlyssnare
     if(refreshButton === null){
@@ -200,13 +168,13 @@ function setRefreshButton() {
     else {
       //Klonar knappen
       newRefreshButton = refreshButton.cloneNode(true);
-      document.body.replaceChild(newRefreshButton, refreshButton);
+      imageContainer.replaceChild(newRefreshButton, refreshButton);
 
       //Lägger till eventlyssnare
       newRefreshButton.addEventListener('click', showRandomImage);
     }
   }
-  //Subbreed-sidan
+  // -- << Kod för subbreed-sidan >> --
   else if(hash.includes('_')){
     //Om det inte finns någon refresh-knapp, så skapa en
     if(refreshButton === null){
@@ -226,7 +194,7 @@ function setRefreshButton() {
     else {
       //Klonar knappen
       newRefreshButton = refreshButton.cloneNode(true);
-      document.body.replaceChild(newRefreshButton, refreshButton);
+      imageContainer.replaceChild(newRefreshButton, refreshButton);
 
       //Lägger till eventlyssnare
       newRefreshButton.addEventListener('click', function(){
@@ -237,7 +205,7 @@ function setRefreshButton() {
       });
     }
   }
-  //Breed-sidan
+  // -- << Kod för breed-sidan >> --
   else {
     //Om det inte finns någon refresh-knapp, så skapa en ny
     if(refreshButton === null){
@@ -255,7 +223,7 @@ function setRefreshButton() {
     else {
       //Klonar knappen
       newRefreshButton = refreshButton.cloneNode(true);
-      document.body.replaceChild(newRefreshButton, refreshButton);
+      imageContainer.replaceChild(newRefreshButton, refreshButton);
 
       //Lägger till eventlyssnare
       newRefreshButton.addEventListener('click', function(){
@@ -271,12 +239,11 @@ function createRefreshButton() {
   let refreshButton = document.createElement('button');
   refreshButton.id = 'refreshbutton';
   refreshButton.textContent = 'New picture';
-  document.body.insertBefore(refreshButton, list);
+  imageContainer.appendChild(refreshButton);
 }
 
-//------------- Funktion som skapar en tillbaka-knapp (eller tar bort den) -----
+//------------- Funktion som hanterar tillbaka-knappen och eventlyssnaren på den -----
 function setGoBackButton() {
-
   //Letar upp hashtag
   let hash = window.location.hash;
 
@@ -288,50 +255,48 @@ function setGoBackButton() {
   //Letar upp tillbaka-knappen, om det finns någon
   let goBackButton = document.querySelector('#gobackbutton');
 
-  //Index-sidan
+  // -- << Kod för index-sidan >> --
   //Tar bort tillbaka-knappen om det finns någon
   if(hash === ''){
     if(goBackButton){
-      document.body.removeChild(goBackButton);
+      imageContainer.removeChild(goBackButton);
     }
   }
-  //Subbreed-sidan
+  // -- << Kod för subbreed-sidan >> --
   else if(hash.includes('_')){
       hashArray = hash.split('_'); //Splittar strängen
       breed = hashArray[0].substring(1); //Breed är första delen av strängen, utan hashtag
 
+      //Skapar en tillbaka-knapp om det inte finns någon
       if(goBackButton === null) {
-        //Skapar en tillbaka-knapp om det inte finns någon
         goBackButton = document.createElement('button');
         goBackButton.textContent = 'Back';
         goBackButton.id = 'gobackbutton';
-        document.body.insertBefore(goBackButton, list);
-      } //End of if
+        imageContainer.appendChild(goBackButton);
+      }
 
+      //Tar bort eventlyssnaren som leder till indexsidan
       goBackButton.removeEventListener('click', onClickGoToIndexPage);
 
       //Lyssnar på knappen
       goBackButton.addEventListener('click', onClickGoToBreed);
-
   }
-  //Breed-sidan
-  //Skapar en tillbaka-knapp om det inte finns någon
+  // -- << Kod för breed-sidan >> --
   else {
+    //Skapar en tillbaka-knapp om det inte finns någon
     if(goBackButton === null) {
-      //Skapar en tillbaka-knapp
       goBackButton = document.createElement('button');
       goBackButton.textContent = 'Back';
       goBackButton.id = 'gobackbutton';
-      document.body.insertBefore(goBackButton, list);
-    } //End of if
+      imageContainer.appendChild(goBackButton);
+    }
 
     //Tar bort eventlyssnaren som leder till breed-sidan
     goBackButton.removeEventListener('click', onClickGoToBreed);
 
     //Lyssnar på knappen
     goBackButton.addEventListener('click', onClickGoToIndexPage);
-
-  } //End of else
+  }
 }
 
 // ------------------- Funktion som skapar en lista med raser eller underraser ------------
@@ -343,20 +308,21 @@ function renderList() {
   let urlString;
 
   //Tömmer listan
-  while(list.firstChild){
-    list.removeChild(list.firstChild);
+  while(selectionDiv.firstChild){
+    selectionDiv.removeChild(selectionDiv.firstChild);
   }
 
   //Ändrar urlString, beroende på vilken sida man befinner sig på
-  //Index-sidan
+  // -- << Kod för indexsidan >> --
   if(hash === ''){
     urlString = 'https://dog.ceo/api/breeds/list/all';
   }
+  // -- << Kod för subbreed-sidan >> --
   //Subbreed-sidan ska inte ha någon lista - går ur funktionen
   else if(hash.includes('_')){
     return;
   }
-  //Breed-sidan
+  // -- << Kod för breed-sidan >> --
   else {
     urlString = 'https://dog.ceo/api/breed/' + hash.slice(1) + '/list';
   }
@@ -373,46 +339,46 @@ function renderList() {
     .then(function(object){
       let breedObject;
       let subbreedArray;
-      let listItem;
-      let a;
-      //Skapar en ny li och a för varje ras/underras, samt lägger till en eventlyssnare på a-taggen
-      //Om det är index-sidan så används en for-in-loop, eftersom raserna ligger i ett objekt
+      let link;
+      //Skapar en ny a-tagg för varje ras/underras, samt lägger till en eventlyssnare
+      // -- << Kod för index-sidan >> --
+      //Använder en for-in-loop, eftersom raserna ligger i ett objekt
       if(hash === ''){
         breedObject = object.message;
         for(let key in breedObject) {
-          listItem = document.createElement('li');
-          a = document.createElement('a');
-          a.textContent = key;
-          a.style.textTransform = 'capitalize';
-          a.addEventListener('click', function(e){
+          link = document.createElement('a');
+          link.textContent = key;
+          link.style.textTransform = 'capitalize';
+          link.addEventListener('click', function(e){
             let breed = e.target.textContent;
             goToBreed(breed);
           });
-          listItem.appendChild(a);
-          list.appendChild(listItem);
+          selectionDiv.appendChild(link);
         }
-      } //if
-      //Om det är underraserna som ska listas så används en for-of-loop, eftersom dessa ligger i en array
+        //Stylar kolumnerna med raser
+        selectionDiv.style.alignContent = 'normal';
+      }
+      // -- << Kod för breed-sidan >> --
+      //Använder en for-of-loop, eftersom underraserna ligger i en array
       else {
         subbreedArray = object.message;
         for(let subbreed of subbreedArray) {
-          listItem = document.createElement('li');
-          a = document.createElement('a');
-          a.textContent = subbreed;
-          a.style.textTransform = 'capitalize';
-          a.addEventListener('click', onClickGoToSubBreed);
-          listItem.appendChild(a);
-          list.appendChild(listItem);
+          link = document.createElement('a');
+          link.textContent = subbreed;
+          link.style.textTransform = 'capitalize';
+          link.addEventListener('click', onClickGoToSubBreed);
+          selectionDiv.appendChild(link);
         }
-      } //else
+        //Stylar kolumnerna med raser
+        selectionDiv.style.alignContent = 'center';
+      }
     })
-  //promise chain
-  }); //End of event listener
+  });
   request.open('GET', urlString);
   request.send();
 }
 
-// ------------------- Funktion som hanterar picture gallery ------------
+// ------------------- Funktion som hanterar bildgalleriet ------------
 function setPictureGallery() {
     //Letar upp hashtag
     let hash = window.location.hash;
@@ -427,11 +393,11 @@ function setPictureGallery() {
       galleryDiv.removeChild(galleryDiv.firstChild);
     }
 
-    //Index-sidan
+    // -- << Kod för index-sidan >> --
     if(hash === ''){
       return;
     }
-    //Subbreed-sidan
+    // -- << Kod för subbreed-sidan >> --
     //Kallar på showAllPictures med två argument
     else if(hash.includes('_')){
       hashArray = hash.split('_'); //Splittar strängen
@@ -439,7 +405,7 @@ function setPictureGallery() {
       subbreed = hashArray[1]; //Subbreed är andra delen av strängen
       showAllPictures(breed, subbreed);
     }
-    //Breed-sidan
+    // -- << Kod för breed-sidan >> --
     //Kallar på showAllPictures med ett argument
     else {
       breed = hash.substring(1); //Tar bort hashtag
@@ -447,12 +413,14 @@ function setPictureGallery() {
     }
 }
 
+// ------------------- Funktion som lägger till bilder i bildgalleriet ------------
+//                   << Visar alla bilder av underrasen om man skickar in argumenten breed+subbreed  >>
+//                   << Visar alla bilder av rasen om man bara skickar in argumentet breed >>
 function showAllPictures(breed, subbreed) {
   let urlString;
 
   //Ändrar urlString beroende på om det är bilder på en ras eller en underras som ska visas
   if(subbreed === undefined){
-    console.log('the subbreed is undefined');
     urlString = 'https://dog.ceo/api/breed/' + breed + '/images';
   }
   else{
@@ -472,15 +440,14 @@ function showAllPictures(breed, subbreed) {
       let imageArray = object.message;
       let image;
 
-      //Loopar igenom array:n med bilder
+      //Loopar igenom array:n och skapar en ny img för varje värde
       for(let imageUrl of imageArray) {
         image = document.createElement('img');
         image.setAttribute('src', imageUrl);
         galleryDiv.appendChild(image);
       }
     })
-  //promise chain
-  }); //End of event listener
+  });
   request.open('GET', urlString);
   request.send();
 }
@@ -524,22 +491,22 @@ function goToBreed(breed) {
   //Ändrar hashtag
   window.location.hash = '#' + breed;
 
-  //Setting header
+  //Uppdaterar header
   setHeaderAndSubHeader();
 
-  //Setting random image
+  //Uppdaterar random image
   setRandomImage();
 
-  //Setting event listener for refresh button
+  //Uppdaterar refresh-knappen
   setRefreshButton();
 
-  //Setting go-back-button
+  //Uppdaterar tillbaka-knappen
   setGoBackButton();
 
-  //Rendering list with breeds or sub-breeds
+  //Uppdaterar listan
   renderList();
 
-  //Setting picture gallery
+  //Uppdaterar bildgalleriet
   setPictureGallery();
 }
 
@@ -555,22 +522,22 @@ function onClickGoToSubBreed(e) {
   //Ändrar hashtag
   window.location.hash = '#' + breed + '_' + subbreed;
 
-  //Setting header and subheader
+  //Uppdaterar header
   setHeaderAndSubHeader();
 
-  //Setting random image
+  //Uppdaterar random image
   setRandomImage();
 
-  //Setting event listener for refresh button
+  //Uppdaterar refresh-knappen
   setRefreshButton();
 
-  //Setting go-back-button
+  //Uppdaterar tillbaka-knappen
   setGoBackButton();
 
-  //Rendering list with breeds or sub-breeds
+  //Uppdaterar listan
   renderList();
 
-  //Setting picture gallery
+  //Uppdaterar bildgalleriet
   setPictureGallery();
 }
 
@@ -589,5 +556,5 @@ setGoBackButton();
 //Skapar listan
 renderList();
 
-//Tar fram alla bilder
+//Tar fram alla bilder i bildgalleriet
 setPictureGallery();

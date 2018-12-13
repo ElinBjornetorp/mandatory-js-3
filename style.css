@@ -1,4 +1,44 @@
 
+body{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h2 {
+  margin-bottom: 3px;
+}
+
+#imagecontainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+#imagecontainer img {
+  max-width: 500px;
+}
+
+#imagecontainer button {
+  width: 100%;
+  padding: 4px;
+  background-color: #6600337a;
+}
+
+#selection {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-height: 200px;
+}
+
+#selection a {
+  cursor: pointer;
+}
+
 #allpictures {
   display: flex;
   flex-wrap: wrap;
