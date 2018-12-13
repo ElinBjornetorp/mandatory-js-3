@@ -1,0 +1,19 @@
+
+#allpictures {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#allpictures img {
+  flex-basis: 100px;
+  flex-grow: 1;
+  max-width: 250px;
+  max-height: 200px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  margin-left: 5px;
+  margin-right: 5px;
+  border-radius: 10px;
+}
