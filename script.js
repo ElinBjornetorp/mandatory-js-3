@@ -16,6 +16,8 @@ function setHeaderAndSubHeader() {
   if(hash === ''){
     header.textContent = 'Random dog';
     header.style.textTransform = 'none';
+    header.style.cursor = 'auto';
+    header.removeEventListener('click', onClickGoToBreed);
     subheader.textContent = '';
   }
   //Kod för subbreed-sidan
@@ -24,6 +26,8 @@ function setHeaderAndSubHeader() {
     let breed = hashArray[0].substring(1);
     header.textContent = breed;
     header.style.textTransform = 'capitalize';
+    header.style.cursor = 'pointer';
+    header.addEventListener('click', onClickGoToBreed);
     let subbreed = hashArray[1];
     subheader.textContent = subbreed;
     subheader.style.textTransform = 'capitalize';
@@ -33,6 +37,8 @@ function setHeaderAndSubHeader() {
   else {
     header.textContent = hash.substring(1);
     header.style.textTransform = 'capitalize';
+    header.style.cursor = 'auto';
+    header.removeEventListener('click', onClickGoToBreed);
 
     //Om det finns en underrubrik, ta bort den
     if(subheader.textContent !== '') {
