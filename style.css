@@ -35,7 +35,7 @@ h2 {
   align-items: center;
   width: 100%;
   max-height: 200px;
-  background: linear-gradient(to right, black 57%, #d03440 57%, #d03440 80%, #fa868f);
+  background: linear-gradient(to right, black 65%, #d03440 74%, #d03440 80%, #fa868f);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
