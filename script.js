@@ -1,5 +1,6 @@
 
 //Letar upp element
+let logo = document.querySelector('#logo');
 let header = document.querySelector('h2');
 let subheader = document.querySelector('h3');
 let imageContainer = document.querySelector('#imagecontainer');
@@ -15,6 +16,7 @@ function setHeaderAndSubHeader() {
   if(hash === ''){
     header.textContent = 'Random dog';
     header.style.textTransform = 'none';
+    subheader.textContent = '';
   }
   //Kod för subbreed-sidan
   else if(hash.includes('_')) {
@@ -540,6 +542,9 @@ function onClickGoToSubBreed(e) {
   //Uppdaterar bildgalleriet
   setPictureGallery();
 }
+
+//Lägger till eventlyssnare så att loggan länkar till startsidan
+logo.addEventListener('click', onClickGoToIndexPage);
 
 //Tar fram headers
 setHeaderAndSubHeader();
