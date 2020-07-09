@@ -25,7 +25,9 @@ h2 {
 #imagecontainer button {
   width: 100%;
   padding: 4px;
-  background-color: #6600337a;
+  background-color: #6d061d;
+  border: none;
+  font-size: 1.1rem;
 }
 
 #selection {
