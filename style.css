@@ -5,6 +5,12 @@ body {
   align-items: center;
   background: rgba(169,3,41,1);
   background: linear-gradient(to right, rgba(169,3,41,1) 0%, rgba(143,2,34,1) 44%, rgba(109,0,25,1) 100%);
+
+  /* Blurred border */
+	/* display: grid;
+	place-content: center;
+	margin: 0;
+	min-height: 100vh; */
 }
 
 h2 {
@@ -16,18 +22,59 @@ button, h1 {
 }
 
 #imagecontainer {
-  display: flex;
+  /* display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: center; */
   margin-bottom: 40px;
 }
 
-#imagecontainer img {
+/* #imagecontainer img {
   max-width: 500px;
+} */
+
+/* Blurred border */
+#imagecontainer div {
+  display: grid;
+	place-content: center;
+	position: relative;
+	border: solid 1.5em rgba(#000, .03);
+	padding: 0 1em;
+	height: 50vmin;
+	max-width: 500px;
+	box-shadow: 2px 2px 5px rgba(#000, .2),
+							2px 2px 17px rgba(#000, .35),
+							2px 2px 25px rgba(#000, .5);
+	background: url('https://images.unsplash.com/photo-1544070078-a212eda27b49?ixlib=rb-1.2.1&q=85&fm=jpg&crop=entropy&cs=srgb&ixid=eyJhcHBfaWQiOjE0NTg5fQ') 50%/ cover
+								border-box /* background-origin */
+								padding-box /* background-clip */;
+}
+
+#imagecontainer div:before {
+  position: absolute;
+  z-index: -1; /* put it *behind* parent */
+  /* go outside padding-box by
+   * a border-width ($b) in every direction */
+  top: -1.5em; right: -1.5em; bottom: -1.5em; left: -1.5em;
+  border: inherit;
+  border-color: transparent;
+  background: inherit;
+  background-clip: border-box;
+  /* -webkit-prefixed version
+   * still needed for
+   * some mobile browsers 💔😭 */
+  -webkit-filter: blur(9px);
+          filter: blur(9px);
+  /* -webkit-prefixed version
+   * still needed for
+   * some mobile browsers 💔😭 */
+  -webkit-clip-path: inset(0);
+          clip-path: inset(0);
+  content: ''
 }
 
 #imagecontainer button {
-  width: 100%;
+  margin-left: -1.5em;
+  width: calc(100% + 3em);
   padding: 4px;
   background-color: #6d061d;
   border: none;
@@ -35,6 +82,7 @@ button, h1 {
 }
 
 #imagecontainer button:nth-of-type(1) {
+  margin-top: 1.5em;
   margin-bottom: 1px;
 }
 
