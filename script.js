@@ -85,7 +85,44 @@ function showRandomImage() {
     })
     .then(parseJSON)
     .then(function(object){
-      image.style.background = 'url("' + object.message + '") 50%/contain border-box padding-box no-repeat';
+      console.log(object);
+      imageContainer.style.background = 'url("' + object.message + '") 50%/contain border-box padding-box no-repeat';
+
+      // Finding out image dimensions
+      let img = new Image;
+      let imageUrl = imageContainer.style.backgroundImage;
+      img.src = imageUrl.replace(/url\(('|")?|('|")?\)$/ig, "");
+      console.log('imageUrl: ', imageUrl);
+      console.log('img.src: ', img.src);
+
+      // We need to wait until the image is loaded to find out height and width
+      // Otherwise they will be 0
+      img.onload = function() {
+        console.log('image loaded into javascript');
+        let imgW = img.width; // Original image width
+        let imgH = img.height; // Original image height
+        console.log(imgW);
+        console.log(imgH);
+
+        let newWidth = 0;
+        let newHeight = 0;
+        let style = getComputedStyle(imageContainer);
+        let paddingLeft = parseInt(style.paddingLeft);
+        let paddingRight = parseInt(style.paddingRight);
+        let paddingTop = parseInt(style.paddingTop);
+        let paddingBottom = parseInt(style.paddingBottom);
+
+        if(imgW > imgH) {
+          newWidth = imageContainer.clientWidth - paddingLeft - paddingRight;
+          newHeight = imgH / imgW * newWidth;
+        }
+        else {
+          newHeight = imageContainer.clientHeight - paddingTop - paddingBottom;
+          newWidth = imgW / imgH * newHeight;
+        }
+        console.log('newWidth: ', newWidth);
+        console.log('newHeight: ', newHeight);
+      };
     })
   });
   request.open('GET', 'https://dog.ceo/api/breeds/image/random');

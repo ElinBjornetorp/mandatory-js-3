@@ -22,10 +22,12 @@ button, h1 {
 }
 
 #imagecontainer {
-  /* display: flex;
+  display: flex;
   flex-direction: column;
-  align-items: center; */
-  margin-bottom: 40px;
+  justify-content: flex-end;
+  align-items: center;
+  /* margin-bottom: 40px; */
+  margin-bottom: 80px;
   width: 50%;
 }
 
@@ -34,20 +36,19 @@ button, h1 {
 } */
 
 /* Blurred border */
-#imagecontainer div {
-  display: grid;
-	place-content: center;
+#imagecontainer {
+  /* display: grid;
+	place-content: center; */
 	position: relative;
 	border: solid 1.5em rgba(#000, .03);
 	padding: 0 1em;
 	height: 50vmin;
-	/* max-width: 500px; */
 	box-shadow: 2px 2px 5px rgba(#000, .2),
 							2px 2px 17px rgba(#000, .35),
 							2px 2px 25px rgba(#000, .5);
 }
 
-#imagecontainer div:before {
+#imagecontainer:before {
   position: absolute;
   z-index: -1; /* put it *behind* parent */
   /* go outside padding-box by
@@ -72,6 +73,7 @@ button, h1 {
 
 #imagecontainer button {
   width: 100%;
+  height: 28px;
   padding: 4px;
   background-color: #6d061d;
   border: none;
@@ -79,8 +81,8 @@ button, h1 {
 }
 
 #imagecontainer button:nth-of-type(1) {
-  margin-top: 1.5em;
-  margin-bottom: 1px;
+  /* margin-top: 1.5em; */
+  margin-bottom: calc(-1.5em - 28px);
 }
 
 #imagecontainer button:focus {
