@@ -30,6 +30,10 @@ h2 {
   font-size: 1.1rem;
 }
 
+#imagecontainer button:nth-of-type(1) {
+  margin-bottom: 1px;
+}
+
 #imagecontainer button:focus {
   outline: 1px solid #3d0411;
   font-weight: bold;
