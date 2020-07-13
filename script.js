@@ -4,7 +4,7 @@ let logo = document.querySelector('#logo');
 let header = document.querySelector('h2');
 let subheader = document.querySelector('h3');
 let imageContainer = document.querySelector('#imagecontainer');
-let image = document.querySelector('#imagecontainer img');
+let image = document.querySelector('#imagecontainer div');
 let selectionDiv = document.querySelector('#selection');
 let galleryDiv = document.querySelector('#allpictures');
 
@@ -85,7 +85,7 @@ function showRandomImage() {
     })
     .then(parseJSON)
     .then(function(object){
-      image.setAttribute('src', object.message);
+      image.style.background = 'url("' + object.message + '") 50%/contain border-box padding-box no-repeat';
     })
   });
   request.open('GET', 'https://dog.ceo/api/breeds/image/random');

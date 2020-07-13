@@ -45,9 +45,6 @@ button, h1 {
 	box-shadow: 2px 2px 5px rgba(#000, .2),
 							2px 2px 17px rgba(#000, .35),
 							2px 2px 25px rgba(#000, .5);
-	background: url('https://images.unsplash.com/photo-1544070078-a212eda27b49?ixlib=rb-1.2.1&q=85&fm=jpg&crop=entropy&cs=srgb&ixid=eyJhcHBfaWQiOjE0NTg5fQ') 50%/ cover
-								border-box /* background-origin */
-								padding-box /* background-clip */;
 }
 
 #imagecontainer div:before {
@@ -74,8 +71,7 @@ button, h1 {
 }
 
 #imagecontainer button {
-  margin-left: -1.5em;
-  width: calc(100% + 3em);
+  width: 100%;
   padding: 4px;
   background-color: #6d061d;
   border: none;
