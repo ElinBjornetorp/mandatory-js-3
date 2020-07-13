@@ -3,6 +3,8 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  background: rgba(169,3,41,1);
+  background: linear-gradient(to right, rgba(169,3,41,1) 0%, rgba(143,2,34,1) 44%, rgba(109,0,25,1) 100%);
 }
 
 h2 {
@@ -27,7 +29,22 @@ button, h1 {
 #imagecontainer button {
   width: 100%;
   padding: 4px;
-  background-color: #6600337a;
+  background-color: #6d061d;
+  border: none;
+  font-size: 1.1rem;
+}
+
+#imagecontainer button:nth-of-type(1) {
+  margin-bottom: 1px;
+}
+
+#imagecontainer button:focus {
+  outline: 1px solid #3d0411;
+  font-weight: bold;
+}
+
+#imagecontainer button:active {
+  outline: 2px solid #3d0411;
 }
 
 #selection {
@@ -37,6 +54,9 @@ button, h1 {
   align-items: center;
   width: 100%;
   max-height: 200px;
+  background: linear-gradient(to right, black 65%, #d03440 74%, #d03440 80%, #fa868f);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 #selection a {

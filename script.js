@@ -246,7 +246,7 @@ function setRefreshButton() {
 function createRefreshButton() {
   let refreshButton = document.createElement('button');
   refreshButton.id = 'refreshbutton';
-  refreshButton.textContent = 'New picture';
+  refreshButton.textContent = 'Shuffle Image';
   imageContainer.appendChild(refreshButton);
 }
 
