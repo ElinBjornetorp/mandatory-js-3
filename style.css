@@ -30,6 +30,15 @@ h2 {
   font-size: 1.1rem;
 }
 
+#imagecontainer button:focus {
+  outline: 1px solid #3d0411;
+  font-weight: bold;
+}
+
+#imagecontainer button:active {
+  outline: 2px solid #3d0411;
+}
+
 #selection {
   display: flex;
   flex-wrap: wrap;
