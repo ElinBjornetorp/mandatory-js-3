@@ -4,7 +4,6 @@ let logo = document.querySelector('#logo');
 let header = document.querySelector('h2');
 let subheader = document.querySelector('h3');
 let imageContainer = document.querySelector('#imagecontainer');
-let image = document.querySelector('#imagecontainer div');
 let selectionDiv = document.querySelector('#selection');
 let galleryDiv = document.querySelector('#allpictures');
 
