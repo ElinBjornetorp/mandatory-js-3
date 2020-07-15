@@ -5,12 +5,6 @@ body {
   align-items: center;
   background: rgba(169,3,41,1);
   background: linear-gradient(to right, rgba(169,3,41,1) 0%, rgba(143,2,34,1) 44%, rgba(109,0,25,1) 100%);
-
-  /* Blurred border */
-	/* display: grid;
-	place-content: center;
-	margin: 0;
-	min-height: 100vh; */
 }
 
 h2 {
@@ -28,12 +22,10 @@ button, h1 {
   align-items: center;
   margin-bottom: 80px;
   width: 50%;
-}
 
-/* Blurred border */
-#imagecontainer {
-	position: relative;
-	border: solid 24px rgba(#000, .03);
+  /* Styling for blurred border */
+  position: relative;
+	border: solid 1.5em rgba(#000, .03);
 	padding: 0 1em;
 	height: 50vmin;
 	box-shadow: 2px 2px 5px rgba(#000, .2),
@@ -44,24 +36,16 @@ button, h1 {
 #imagecontainer:before {
   position: absolute;
   z-index: -1; /* put it *behind* parent */
-  /* go outside padding-box by
-   * a border-width ($b) in every direction */
-  top: -24px; right: -24px; bottom: -24px; left: -24px;
+  top: -1.5em; right: -1.5em; bottom: -1.5em; left: -1.5em; /* This is the border width */
   border: inherit;
   border-color: transparent;
   background: inherit;
   background-clip: border-box;
-  /* -webkit-prefixed version
-   * still needed for
-   * some mobile browsers 💔😭 */
   -webkit-filter: blur(9px);
           filter: blur(9px);
-  /* -webkit-prefixed version
-   * still needed for
-   * some mobile browsers 💔😭 */
   -webkit-clip-path: inset(0);
           clip-path: inset(0);
-  content: ''
+  content: '';
 }
 
 #imagecontainer button {
@@ -74,8 +58,7 @@ button, h1 {
 }
 
 #imagecontainer button:nth-of-type(1) {
-  /* margin-top: 24px; */
-  margin-bottom: calc(-24px - 28px);
+  margin-bottom: calc(-1.5em - 28px);
 }
 
 #imagecontainer button:focus {

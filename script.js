@@ -93,32 +93,12 @@ function showRandomImage() {
       let imageUrl = imageContainer.style.backgroundImage;
       img.src = imageUrl.replace(/url\(('|")?|('|")?\)$/ig, "");
 
-      // We need to wait until the image is loaded to find out height and width
-      // Otherwise they will be 0
+      // Adjusting button width to image
       img.onload = function() {
-        console.log('image loaded into javascript');
+        // We need to wait until the image is loaded to find out height and width - otherwise they will be 0
         let imgW = img.width; // Original image width
         let imgH = img.height; // Original image height
-        let quotient = imgW / imgH;
-        console.log('quotient: ', quotient);
-
-        // Translating image dimensions to the actual height and width
-        let style = getComputedStyle(imageContainer);
-        let paddingTop = parseInt(style.paddingTop);
-        let paddingBottom = parseInt(style.paddingBottom);
-        let newHeight = imageContainer.clientHeight - paddingTop - paddingBottom;
-        console.log('newHeight: ', newHeight);
-        let newWidth = newHeight * quotient;
-        console.log('newWidth: ', newWidth);
-        let borderWidth = newWidth * 0.09; // How I knew the border width? I took a guess...
-        let newWidthIncludingBorder = newWidth + borderWidth * 2;
-        console.log(newWidthIncludingBorder);
-
-        // Apply width to the button(s) below the image
-        let buttons = document.querySelectorAll('#imagecontainer button');
-        for(let button of buttons) {
-          button.style.width = newWidthIncludingBorder + 'px';
-        }
+        adjustButtonWidthToImage(imgW, imgH);
       };
     })
   });
@@ -341,8 +321,28 @@ function setGoBackButton() {
   }
 }
 
-function adjustButtonWidthToImage(image) {
+function adjustButtonWidthToImage(originalWidth, originalHeight) {
+  let quotient = originalWidth / originalHeight;
 
+  // Finding out the actual height of the image
+  // (which always equals the height of the image container)
+  let style = getComputedStyle(imageContainer);
+  let paddingTop = parseInt(style.paddingTop);
+  let paddingBottom = parseInt(style.paddingBottom);
+  let newHeight = imageContainer.clientHeight - paddingTop - paddingBottom;
+
+  // Calculating the actual width of the image
+  let newWidth = newHeight * quotient;
+
+  // Adding border width
+  let borderWidth = newWidth * 0.09; // How I knew the border width? I took a guess...
+  let newWidthIncludingBorder = newWidth + borderWidth * 2;
+
+  // Applying width to the button(s) below the image
+  let buttons = document.querySelectorAll('#imagecontainer button');
+  for(let button of buttons) {
+    button.style.width = newWidthIncludingBorder + 'px';
+  }
 }
 
 // ------------------- Funktion som skapar en lista med raser eller underraser ------------
