@@ -93,7 +93,7 @@ function showRandomImage() {
       let imageUrl = imageContainer.style.backgroundImage;
       img.src = imageUrl.replace(/url\(('|")?|('|")?\)$/ig, "");
 
-      // Adjusting button width to image
+      // Adjusting button width to fit image
       img.onload = function() {
         // We need to wait until the image is loaded to find out height and width - otherwise they will be 0
         let imgW = img.width; // Original image width
@@ -120,7 +120,21 @@ function showRandomImageByBreed(breed) {
     })
     .then(parseJSON)
     .then(function(object){
-      image.setAttribute('src', object.message);
+      // Swapping background image
+      imageContainer.style.background = 'url("' + object.message + '") 50%/contain border-box padding-box no-repeat';
+
+      // Creating an image with js, to find out image dimensions
+      let img = new Image;
+      let imageUrl = imageContainer.style.backgroundImage;
+      img.src = imageUrl.replace(/url\(('|")?|('|")?\)$/ig, "");
+
+      // Adjusting button width to fit image
+      img.onload = function() {
+        // We need to wait until the image is loaded to find out height and width - otherwise they will be 0
+        let imgW = img.width; // Original image width
+        let imgH = img.height; // Original image height
+        adjustButtonWidthToImage(imgW, imgH);
+      };
     })
   });
   request.open('GET', 'https://dog.ceo/api/breed/' + breed + '/images/random');
@@ -141,7 +155,21 @@ function showRandomImageBySubBreed(breed, subbreed) {
     })
     .then(parseJSON)
     .then(function(object){
-      image.setAttribute('src', object.message);
+      // Swapping background image
+      imageContainer.style.background = 'url("' + object.message + '") 50%/contain border-box padding-box no-repeat';
+
+      // Creating an image with js, to find out image dimensions
+      let img = new Image;
+      let imageUrl = imageContainer.style.backgroundImage;
+      img.src = imageUrl.replace(/url\(('|")?|('|")?\)$/ig, "");
+
+      // Adjusting button width to fit image
+      img.onload = function() {
+        // We need to wait until the image is loaded to find out height and width - otherwise they will be 0
+        let imgW = img.width; // Original image width
+        let imgH = img.height; // Original image height
+        adjustButtonWidthToImage(imgW, imgH);
+      };
     })
   });
   urlString = 'https://dog.ceo/api/breed/' + breed + '/' + subbreed + '/images/random';
