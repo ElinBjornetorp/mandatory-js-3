@@ -498,7 +498,7 @@ function createGalleryHeader() {
   galleryHeader = document.createElement('h1');
   galleryHeader.textContent = 'gallery';
   galleryHeader.id = 'gallery-header';
-  galleryHeader.setAttribute('title', 'Showing all available images with dogs of the chosen breed');
+  galleryHeader.setAttribute('title', 'Showing all available images of dogs of the chosen breed');
   galleryContainer.insertBefore(galleryHeader, gallery);
 }
 
