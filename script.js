@@ -461,7 +461,6 @@ function setPictureGallery() {
     let hashArray;
     let breed;
     let subbreed;
-    let galleryHeader = document.querySelector('#gallery-header');
 
     //Alla bilder i gallery div rensas bort
     while(gallery.firstChild){
@@ -470,36 +469,24 @@ function setPictureGallery() {
 
     // -- << Kod för index-sidan >> --
     if(hash === ''){
-      // Remove gallery header if there is one
-      if(galleryHeader) {
-        galleryContainer.removeChild(galleryHeader);
-      }
+      galleryContainer.classList.add('hide'); //Döljer bildgalleriet
     }
     // -- << Kod för subbreed-sidan >> --
     //Kallar på showAllPictures med två argument
     else if(hash.includes('_')){
+      galleryContainer.classList.remove('hide'); //Tar bort display:none
       hashArray = hash.split('_'); //Splittar strängen
       breed = hashArray[0].substring(1); //Breed är första delen av strängen, utan hashtag
       subbreed = hashArray[1]; //Subbreed är andra delen av strängen
-      if(!galleryHeader) createGalleryHeader(); //Skapar en header om den inte finns
       showAllPictures(breed, subbreed); //Visar bilderna
     }
     // -- << Kod för breed-sidan >> --
     //Kallar på showAllPictures med ett argument
     else {
-      if(!galleryHeader) createGalleryHeader(); //Skapar en header om den inte finns
-      breed = hash.substring(1); //Tar bort hashtag
+      galleryContainer.classList.remove('hide'); //Tar bort display:none
+      breed = hash.substring(1); //Tar bort hashtag från strängen
       showAllPictures(breed); //Visar bilderna
     }
-}
-
-// ------------------- Funktion som skapar en rubrik till bildgalleriet  ------------
-function createGalleryHeader() {
-  galleryHeader = document.createElement('h1');
-  galleryHeader.textContent = 'gallery';
-  galleryHeader.id = 'gallery-header';
-  galleryHeader.setAttribute('title', 'Showing all available images of dogs of the chosen breed');
-  galleryContainer.insertBefore(galleryHeader, gallery);
 }
 
 // ------------------- Funktion som lägger till bilder i bildgalleriet ------------
