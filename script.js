@@ -5,7 +5,8 @@ let header = document.querySelector('h2');
 let subheader = document.querySelector('h3');
 let imageContainer = document.querySelector('#imagecontainer');
 let selectionDiv = document.querySelector('#selection');
-let galleryDiv = document.querySelector('#allpictures');
+let galleryContainer = document.querySelector('#gallery-container');
+let gallery = document.querySelector('#gallery');
 
 // --------------Funktion som hanterar rubrikerna ------------------------------
 function setHeaderAndSubHeader() {
@@ -460,15 +461,19 @@ function setPictureGallery() {
     let hashArray;
     let breed;
     let subbreed;
+    let galleryHeader = document.querySelector('#gallery-header');
 
     //Alla bilder i gallery div rensas bort
-    while(galleryDiv.firstChild){
-      galleryDiv.removeChild(galleryDiv.firstChild);
+    while(gallery.firstChild){
+      gallery.removeChild(gallery.firstChild);
     }
 
     // -- << Kod för index-sidan >> --
     if(hash === ''){
-      return;
+      // Remove gallery header if there is one
+      if(galleryHeader) {
+        galleryContainer.removeChild(galleryHeader);
+      }
     }
     // -- << Kod för subbreed-sidan >> --
     //Kallar på showAllPictures med två argument
@@ -476,14 +481,25 @@ function setPictureGallery() {
       hashArray = hash.split('_'); //Splittar strängen
       breed = hashArray[0].substring(1); //Breed är första delen av strängen, utan hashtag
       subbreed = hashArray[1]; //Subbreed är andra delen av strängen
-      showAllPictures(breed, subbreed);
+      if(!galleryHeader) createGalleryHeader(); //Skapar en header om den inte finns
+      showAllPictures(breed, subbreed); //Visar bilderna
     }
     // -- << Kod för breed-sidan >> --
     //Kallar på showAllPictures med ett argument
     else {
+      if(!galleryHeader) createGalleryHeader(); //Skapar en header om den inte finns
       breed = hash.substring(1); //Tar bort hashtag
-      showAllPictures(breed);
+      showAllPictures(breed); //Visar bilderna
     }
+}
+
+// ------------------- Funktion som skapar en rubrik till bildgalleriet  ------------
+function createGalleryHeader() {
+  galleryHeader = document.createElement('h1');
+  galleryHeader.textContent = 'gallery';
+  galleryHeader.id = 'gallery-header';
+  galleryHeader.setAttribute('title', 'Showing all available images with dogs of the chosen breed');
+  galleryContainer.insertBefore(galleryHeader, gallery);
 }
 
 // ------------------- Funktion som lägger till bilder i bildgalleriet ------------
@@ -517,7 +533,7 @@ function showAllPictures(breed, subbreed) {
       for(let imageUrl of imageArray) {
         image = document.createElement('img');
         image.setAttribute('src', imageUrl);
-        galleryDiv.appendChild(image);
+        gallery.appendChild(image);
       }
     })
   });

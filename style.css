@@ -15,7 +15,7 @@ h3 {
   margin-top: 0;
 }
 
-button, h1 {
+button, #logo {
   cursor: pointer;
 }
 
@@ -98,21 +98,44 @@ button, h1 {
   cursor: pointer;
 }
 
-#allpictures {
+#gallery-container {
+  background-color: black;
+  border-radius: 8px;
+}
+
+#gallery-container h1 {
+  margin-top: 1em;
+  margin-left: 40%; /* This is so that the 'title' text only shows when you hover over the header and close by */
+  margin-right: 40%; /* Same as above */
+  color: white;
+  text-transform: capitalize;
+  text-align: center;
+  font-style: italic;
+  font-weight: 100;
+  /* font-family: 'Great Vibes', cursive; */
+  /* font-size: 4rem;
+  font-weight: 100; */
+  /* font-family: 'Parisienne', cursive; */
+  /* font-family: 'Lovers Quarrel', cursive;
+  font-size: 4.5rem; */
+
+}
+
+#gallery {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
 }
 
-#allpictures img {
+#gallery img {
   flex-basis: 100px;
   flex-grow: 1;
   max-width: 250px;
   max-height: 200px;
   margin-top: 15px;
   margin-bottom: 15px;
-  margin-left: 5px;
-  margin-right: 5px;
+  margin-left: 10px;
+  margin-right: 10px;
   border-radius: 10px;
 }
