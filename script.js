@@ -100,6 +100,31 @@ function showRandomImage() {
         let imgH = img.height; // Original image height
         adjustButtonWidthToImage(imgW, imgH);
       };
+
+      // Finding out current breed
+      let urlArray = object.message.split('/');
+      let currentBreed = '';
+      for(let i = 0; i < urlArray.length; i++) {
+        if(urlArray[i] === 'breeds') {
+          currentBreed = urlArray[i+1];
+          if(currentBreed.includes('-')) { // Breed and subbreed are separated by a dash
+            let newArray = currentBreed.split('-');
+            currentBreed = newArray[0];
+          }
+          break;
+        }
+      }
+
+      // Highlighting current breed
+      let breedSelection = document.querySelectorAll('#selection a');
+      for(let anchortag of breedSelection) {
+        if(anchortag.textContent === currentBreed) {
+          anchortag.classList.add('current-breed');
+        }
+        else {
+          anchortag.classList.remove('current-breed');
+        }
+      }
     })
   });
   request.open('GET', 'https://dog.ceo/api/breeds/image/random');
@@ -345,7 +370,6 @@ function setGoBackButton() {
       let refreshButton = document.querySelector('#refreshbutton');
       let style = getComputedStyle(refreshButton);
       let currentButtonWidth = style.width;
-      console.log(currentButtonWidth);
       goBackButton.style.width = currentButtonWidth;
     }
 

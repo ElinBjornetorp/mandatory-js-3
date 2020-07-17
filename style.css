@@ -102,6 +102,11 @@ button, #logo {
   cursor: pointer;
 }
 
+#selection a.current-breed {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
 #gallery-container {
   width: 100%;
   background-color: black;
