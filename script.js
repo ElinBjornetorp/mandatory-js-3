@@ -349,6 +349,7 @@ function setGoBackButton() {
   }
 }
 
+//------------- Funktion som justerar bredden på knapparna --------------------
 function adjustButtonWidthToImage(originalWidth, originalHeight) {
   let quotient = originalWidth / originalHeight;
 
@@ -534,22 +535,25 @@ function onClickGoToIndexPage(e){
   //Ändrar hashtag
   window.location.hash = '';
 
-  //Setting header
+  //Går till toppen av sidan
+  window.scrollTo(0,0);
+
+  //Uppdaterar rubrikerna
   setHeaderAndSubHeader();
 
-  //Setting random image
+  //Uppdaterar bilden
   setRandomImage();
 
-  //Setting event listener for refresh button
+  //Uppdaterar refresh-knappen
   setRefreshButton();
 
-  //Setting go-back-button
+  //Uppdaterar tillbaka-knappen
   setGoBackButton();
 
-  //Rendering list with breeds or sub-breeds
+  //Uppdaterar listan
   renderList();
 
-  //Setting picture gallery
+  //Uppdaterar bildgalleriet
   setPictureGallery();
 }
 
@@ -566,6 +570,9 @@ function onClickGoToBreed(){
 function goToBreed(breed) {
   //Ändrar hashtag
   window.location.hash = '#' + breed;
+
+  //Går till toppen av sidan
+  window.scrollTo(0,0);
 
   //Uppdaterar header
   setHeaderAndSubHeader();
@@ -597,6 +604,9 @@ function onClickGoToSubBreed(e) {
 
   //Ändrar hashtag
   window.location.hash = '#' + breed + '_' + subbreed;
+
+  //Går till toppen av sidan
+  window.scrollTo(0,0);
 
   //Uppdaterar header
   setHeaderAndSubHeader();
