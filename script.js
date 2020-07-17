@@ -339,6 +339,14 @@ function setGoBackButton() {
       goBackButton.textContent = 'Back';
       goBackButton.id = 'gobackbutton';
       imageContainer.appendChild(goBackButton);
+
+      //Justerar bredd på tillbaka-knappen (tillfälligt)
+      //Detta är för att undvika att knapparna har olika bredd medan bilden laddas (tillbaka-knappen blir i så fall 100% i bredd medan refresh-knappen är anpassad till föregående bild)
+      let refreshButton = document.querySelector('#refreshbutton');
+      let style = getComputedStyle(refreshButton);
+      let currentButtonWidth = style.width;
+      console.log(currentButtonWidth);
+      goBackButton.style.width = currentButtonWidth;
     }
 
     //Tar bort eventlyssnaren som leder till breed-sidan
@@ -577,14 +585,15 @@ function goToBreed(breed) {
   //Uppdaterar header
   setHeaderAndSubHeader();
 
+  //Uppdaterar tillbaka-knappen
+  //*Denna kod körs innan bilden laddas, för att vara säker på att knappens tillfälliga bredd sätts innan den slutgiltiga*
+  setGoBackButton();
+
   //Uppdaterar random image
   setRandomImage();
 
   //Uppdaterar refresh-knappen
   setRefreshButton();
-
-  //Uppdaterar tillbaka-knappen
-  setGoBackButton();
 
   //Uppdaterar listan
   renderList();
