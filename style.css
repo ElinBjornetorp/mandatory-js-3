@@ -145,7 +145,7 @@ button, #logo {
 
 /* Responsive design */
 
-@media (max-width: 900px) {
+@media (max-width: 640px) {
   #logo {
     color: crimson;
   }
@@ -157,5 +157,13 @@ button, #logo {
 
   #imagecontainer::before {
     display: none;
+  }
+
+  #imagecontainer button:nth-of-type(1) {
+    bottom: -32px;
+  }
+
+  #imagecontainer button:nth-of-type(2) {
+    bottom: -65px;
   }
 }

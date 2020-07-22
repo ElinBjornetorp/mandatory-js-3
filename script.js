@@ -88,18 +88,30 @@ function showRandomImage() {
       // Swapping background image
       imageContainer.style.background = 'url("' + object.message + '") 50%/contain border-box padding-box no-repeat';
 
-      // Creating an image with js, to find out image dimensions
-      let img = new Image;
-      let imageUrl = imageContainer.style.backgroundImage;
-      img.src = imageUrl.replace(/url\(('|")?|('|")?\)$/ig, "");
+      let viewportWidth = window.innerWidth;
+      console.log('viewportWidth: ', viewportWidth);
 
       // Adjusting button width to fit image
-      img.onload = function() {
-        // We need to wait until the image is loaded to find out height and width - otherwise they will be 0
-        let imgW = img.width; // Original image width
-        let imgH = img.height; // Original image height
-        adjustButtonWidthToImage(imgW, imgH);
-      };
+      if(viewportWidth > 640) {
+        // Creating an image with js, to find out image dimensions
+        let img = new Image;
+        let imageUrl = imageContainer.style.backgroundImage;
+        img.src = imageUrl.replace(/url\(('|")?|('|")?\)$/ig, "");
+
+        img.onload = function() {
+          // We need to wait until the image is loaded to find out height and width - otherwise they will be 0
+          let imgW = img.width; // Original image width
+          let imgH = img.height; // Original image height
+          adjustButtonWidthToImage(imgW, imgH);
+        };
+      }
+      // Do not adjust button width on small devices
+      else {
+        let buttons = document.querySelectorAll('#imagecontainer button');
+        for(let button of buttons) {
+          button.style.width = '100%';
+        }
+      }
 
       // Finding out current breed
       let urlArray = object.message.split('/');
@@ -148,18 +160,30 @@ function showRandomImageByBreed(breed) {
       // Swapping background image
       imageContainer.style.background = 'url("' + object.message + '") 50%/contain border-box padding-box no-repeat';
 
-      // Creating an image with js, to find out image dimensions
-      let img = new Image;
-      let imageUrl = imageContainer.style.backgroundImage;
-      img.src = imageUrl.replace(/url\(('|")?|('|")?\)$/ig, "");
+      let viewportWidth = window.innerWidth;
+      console.log('viewportWidth: ', viewportWidth);
 
       // Adjusting button width to fit image
-      img.onload = function() {
-        // We need to wait until the image is loaded to find out height and width - otherwise they will be 0
-        let imgW = img.width; // Original image width
-        let imgH = img.height; // Original image height
-        adjustButtonWidthToImage(imgW, imgH);
-      };
+      if(viewportWidth > 640) {
+        // Creating an image with js, to find out image dimensions
+        let img = new Image;
+        let imageUrl = imageContainer.style.backgroundImage;
+        img.src = imageUrl.replace(/url\(('|")?|('|")?\)$/ig, "");
+
+        img.onload = function() {
+          // We need to wait until the image is loaded to find out height and width - otherwise they will be 0
+          let imgW = img.width; // Original image width
+          let imgH = img.height; // Original image height
+          adjustButtonWidthToImage(imgW, imgH);
+        };
+      }
+      // Do not adjust button width on small devices
+      else {
+        let buttons = document.querySelectorAll('#imagecontainer button');
+        for(let button of buttons) {
+          button.style.width = '100%';
+        }
+      }
     })
   });
   request.open('GET', 'https://dog.ceo/api/breed/' + breed + '/images/random');
@@ -183,18 +207,27 @@ function showRandomImageBySubBreed(breed, subbreed) {
       // Swapping background image
       imageContainer.style.background = 'url("' + object.message + '") 50%/contain border-box padding-box no-repeat';
 
-      // Creating an image with js, to find out image dimensions
-      let img = new Image;
-      let imageUrl = imageContainer.style.backgroundImage;
-      img.src = imageUrl.replace(/url\(('|")?|('|")?\)$/ig, "");
-
       // Adjusting button width to fit image
-      img.onload = function() {
-        // We need to wait until the image is loaded to find out height and width - otherwise they will be 0
-        let imgW = img.width; // Original image width
-        let imgH = img.height; // Original image height
-        adjustButtonWidthToImage(imgW, imgH);
-      };
+      if(viewportWidth > 640) {
+        // Creating an image with js, to find out image dimensions
+        let img = new Image;
+        let imageUrl = imageContainer.style.backgroundImage;
+        img.src = imageUrl.replace(/url\(('|")?|('|")?\)$/ig, "");
+
+        img.onload = function() {
+          // We need to wait until the image is loaded to find out height and width - otherwise they will be 0
+          let imgW = img.width; // Original image width
+          let imgH = img.height; // Original image height
+          adjustButtonWidthToImage(imgW, imgH);
+        };
+      }
+      // Do not adjust button width on small devices
+      else {
+        let buttons = document.querySelectorAll('#imagecontainer button');
+        for(let button of buttons) {
+          button.style.width = '100%';
+        }
+      }
     })
   });
   urlString = 'https://dog.ceo/api/breed/' + breed + '/' + subbreed + '/images/random';
