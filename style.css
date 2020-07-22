@@ -142,3 +142,20 @@ button, #logo {
   margin-right: 10px;
   border-radius: 10px;
 }
+
+/* Responsive design */
+
+@media (max-width: 900px) {
+  #logo {
+    color: crimson;
+  }
+
+  #imagecontainer {
+    height: 80vmin;
+    width: 100%;
+  }
+
+  #imagecontainer::before {
+    display: none;
+  }
+}
