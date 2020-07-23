@@ -14,8 +14,7 @@ function setHeaderAndSubHeader() {
 
   //Kod för index-sidan
   if(hash === ''){
-    header.textContent = 'Random dog';
-    header.style.textTransform = 'none';
+    header.textContent = '';
     header.style.cursor = 'auto';
     header.removeEventListener('click', onClickGoToBreed);
     subheader.textContent = '';
@@ -88,11 +87,8 @@ function showRandomImage() {
       // Swapping background image
       imageContainer.style.background = 'url("' + object.message + '") 50%/contain border-box padding-box no-repeat';
 
-      let viewportWidth = window.innerWidth;
-      console.log('viewportWidth: ', viewportWidth);
-
       // Adjusting button width to fit image
-      if(viewportWidth > 640) {
+      if(window.innerWidth > 640) {
         // Creating an image with js, to find out image dimensions
         let img = new Image;
         let imageUrl = imageContainer.style.backgroundImage;
@@ -160,11 +156,8 @@ function showRandomImageByBreed(breed) {
       // Swapping background image
       imageContainer.style.background = 'url("' + object.message + '") 50%/contain border-box padding-box no-repeat';
 
-      let viewportWidth = window.innerWidth;
-      console.log('viewportWidth: ', viewportWidth);
-
       // Adjusting button width to fit image
-      if(viewportWidth > 640) {
+      if(window.innerWidth > 640) {
         // Creating an image with js, to find out image dimensions
         let img = new Image;
         let imageUrl = imageContainer.style.backgroundImage;
@@ -208,7 +201,7 @@ function showRandomImageBySubBreed(breed, subbreed) {
       imageContainer.style.background = 'url("' + object.message + '") 50%/contain border-box padding-box no-repeat';
 
       // Adjusting button width to fit image
-      if(viewportWidth > 640) {
+      if(window.innerWidth > 640) {
         // Creating an image with js, to find out image dimensions
         let img = new Image;
         let imageUrl = imageContainer.style.backgroundImage;
