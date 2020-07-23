@@ -153,6 +153,7 @@ button, #logo {
   #imagecontainer {
     height: 80vmin;
     width: 100%;
+    margin-bottom: 80px;
   }
 
   #imagecontainer::before {
@@ -165,5 +166,10 @@ button, #logo {
 
   #imagecontainer button:nth-of-type(2) {
     bottom: -65px;
+  }
+
+  #selection {
+    max-height: none;
+    font-size: 1.2rem;
   }
 }
