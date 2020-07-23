@@ -172,4 +172,8 @@ button, #logo {
     max-height: none;
     font-size: 1.2rem;
   }
+
+  #gallery {
+    justify-content: space-around;
+  }
 }
